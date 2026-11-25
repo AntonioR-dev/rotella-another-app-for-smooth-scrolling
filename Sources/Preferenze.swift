@@ -9,14 +9,14 @@ struct Pannello: View {
     var body: some View {
         Form {
             sezioneServizio
-            Section("Direzione") {
-                Toggle("Inverti la direzione del mouse", isOn: $impostazioni.invertiMouse)
-                Toggle("Inverti la direzione del trackpad", isOn: $impostazioni.invertiTrackpad)
-                Text("Le due opzioni invertono separatamente la direzione di macOS. I gesti di Magic Mouse seguono l’opzione Trackpad.")
+            Section("Scroll Direction") {
+                Toggle("Reverse Mouse Scrolling", isOn: $impostazioni.invertiMouse)
+                Toggle("Reverse Trackpad Scrolling", isOn: $impostazioni.invertiTrackpad)
+                Text("Each switch reverses the macOS scroll direction independently. Magic Mouse gestures follow the trackpad setting.")
                     .font(.caption).foregroundStyle(.secondary)
             }
-            Section("Rotella del mouse") {
-                Toggle("Scorrimento fluido", isOn: $impostazioni.fluidita)
+            Section("Mouse Wheel") {
+                Toggle("Smooth Scrolling", isOn: $impostazioni.fluidita)
                 ForEach(Parametro.allCases) { p in
                     let dati = p.dati
                     VStack(alignment: .leading, spacing: 4) {
@@ -36,7 +36,7 @@ struct Pannello: View {
                 }
             }
             Section {
-                Button("Ripristina valori iniziali") { impostazioni = Impostazioni() }
+                Button("Restore Defaults") { impostazioni = Impostazioni() }
             }
         }
         .formStyle(.grouped)
@@ -51,27 +51,27 @@ struct Pannello: View {
         .onChange(of: impostazioni) { valore in valore.salva() }
     }
     private var sezioneServizio: some View {
-        Section("Servizio di scorrimento") {
+        Section("Background Service") {
             Label(servizio.stato, systemImage: servizio.pronto ? "checkmark.circle.fill" : "info.circle")
             HStack {
-                Button("Installa servizio") { servizio.installa() }
+                Button("Install Service") { servizio.installa() }
                     .disabled(!servizio.puoInstallare)
-                Button("Disinstalla servizio") { servizio.disinstalla() }
+                Button("Uninstall Service") { servizio.disinstalla() }
                     .disabled(!servizio.puoDisinstallare)
             }
             if servizio.legacy {
-                Button("Rimuovi servizio precedente") { servizio.rimuoviPrecedente() }
+                Button("Remove Previous Service") { servizio.rimuoviPrecedente() }
             }
             if servizio.serveApprovazione {
-                Button("Apri elementi login") { servizio.apriElementiLogin() }
+                Button("Open Login Items") { servizio.apriElementiLogin() }
             }
             if !servizio.accessibilita {
-                Button("Autorizza in Accessibilità") { servizio.apriAccessibilita() }
+                Button("Open Accessibility Settings") { servizio.apriAccessibilita() }
             }
             if let errore = servizio.errore {
                 Text(errore).foregroundStyle(.red)
             }
-            Text("Il servizio continua a funzionare quando chiudi Rotella.")
+            Text("The service keeps working after you quit Rotella.")
                 .font(.caption).foregroundStyle(.secondary)
         }
     }

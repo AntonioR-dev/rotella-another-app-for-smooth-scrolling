@@ -12,7 +12,7 @@ Rotella is a macOS utility for smoother mouse-wheel scrolling and independent sc
 
 <img src="Resources/rotella-settings.png" alt="Rotella settings showing service controls, scroll direction switches, and mouse-wheel sliders" width="560">
 
-*Settings in the Italian interface. This screenshot shows an earlier build.*
+*Rotella settings with service controls, independent scroll directions, and mouse-wheel tuning.*
 
 ## Installation guide
 
@@ -31,17 +31,17 @@ open build
 
 Drag **Rotella.app** from the build folder to **Applications** and open it there. The local build is signed ad hoc and does not need a Developer ID.
 
-1. If Rotella detects the service from version 2, choose **Rimuovi servizio precedente** (Remove previous service).
-2. Choose **Installa servizio** (Install service). If macOS requests approval, allow Rotella under **System Settings → General → Login Items & Extensions**.
-3. Open **System Settings → Privacy & Security → Accessibility** and enable the **Rotella.app** you copied to Applications. If an entry from an earlier build is already present and Rotella still reports that it needs permission, remove that entry and add the current app again.
+1. If Rotella detects a service from an earlier version, choose **Remove Previous Service**.
+2. Choose **Install Service**. If macOS requests approval, choose **Open Login Items** and allow Rotella under **System Settings → General → Login Items & Extensions**.
+3. Choose **Open Accessibility Settings** to go to **System Settings → Privacy & Security → Accessibility** and enable the **Rotella.app** you copied to Applications. If an entry from an earlier build is already present and Rotella still reports that it needs permission, remove that entry and add the current app again.
 
 ## How to use it
 
-Open Rotella whenever you want to adjust settings. In **Direzione** (Direction), set the mouse and trackpad switches independently. Under **Rotella del mouse** (Mouse wheel), enable smooth scrolling and try the sliders in a long page as you make adjustments. A longer deceleration makes the wheel coast longer after the last step.
+Open Rotella whenever you want to adjust settings. In **Scroll Direction**, set the mouse and trackpad switches independently. Under **Mouse Wheel**, enable **Smooth Scrolling** and try the sliders in a long page as you make adjustments. A longer deceleration makes the wheel coast longer after the last step.
 
 Devices that send continuous gesture events, such as Magic Mouse, follow the trackpad direction setting. The smoothing controls apply to wheels that send discrete steps. Scrolling with modifier keys uses the macOS behavior.
 
-Choose **Disinstalla servizio** (Uninstall service) to stop it and remove it from automatic startup.
+Choose **Uninstall Service** to stop it and remove it from automatic startup.
 
 ## Build a universal archive
 

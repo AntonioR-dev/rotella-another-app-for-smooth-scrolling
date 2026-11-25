@@ -7,10 +7,10 @@ enum Parametro: String, CaseIterable, Identifiable {
 
     var dati: (titolo: String, intervallo: ClosedRange<Double>, iniziale: Double, passo: Double, unita: String, aiuto: String) {
         switch self {
-        case .passo: return ("Velocità", 8...80, 32, 1, "px", "Distanza percorsa con uno scatto lento.")
-        case .accelerazione: return ("Accelerazione", 1...8, 2.5, 0.1, "×", "Aumenta la distanza quando giri la rotella più rapidamente.")
-        case .durata: return ("Rallentamento", 60...380, 170, 5, "ms", "Un valore più alto allunga la frenata.")
-        case .velocita: return ("Risposta iniziale", 0.6...2, 1, 0.05, "×", "Un valore più alto anticipa parte del movimento.")
+        case .passo: return ("Speed", 8...80, 32, 1, "px", "Distance traveled per slow wheel step.")
+        case .accelerazione: return ("Acceleration", 1...8, 2.5, 0.1, "×", "Increases the distance when you turn the wheel faster.")
+        case .durata: return ("Deceleration", 60...380, 170, 5, "ms", "Higher values make scrolling coast longer.")
+        case .velocita: return ("Initial Response", 0.6...2, 1, 0.05, "×", "Higher values deliver more movement at the start.")
         }
     }
 }

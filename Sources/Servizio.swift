@@ -31,14 +31,14 @@ final class Servizio: ObservableObject {
     var pronto: Bool { registrazione == .enabled && accessibilita && !legacy }
 
     var stato: String {
-        if legacy { return "È presente il servizio di Rotella 2" }
+        if legacy { return "A service from an earlier version is installed" }
         switch registrazione {
-        case .enabled: return accessibilita ? "Servizio abilitato" : "Serve il permesso di Accessibilità"
-        case .requiresApproval: return "Consenti Rotella negli elementi login"
-        case .notRegistered: return "Servizio non installato"
+        case .enabled: return accessibilita ? "Service enabled" : "Accessibility permission required"
+        case .requiresApproval: return "Allow Rotella in Login Items"
+        case .notRegistered: return "Service not installed"
         case .notFound:
-            return plistIncluso ? "Servizio da registrare in macOS" : "File del servizio assente dall’app"
-        @unknown default: return "Stato del servizio sconosciuto"
+            return plistIncluso ? "Service ready to install" : "Service file missing from the app"
+        @unknown default: return "Unknown service status"
         }
     }
 
@@ -85,7 +85,7 @@ final class Servizio: ObservableObject {
             if try launchctl("print") == 0 {
                 guard try launchctl("bootout") == 0 || launchctl("print") != 0 else {
                     throw NSError(domain: "Rotella", code: 1, userInfo: [
-                        NSLocalizedDescriptionKey: "Impossibile arrestare il servizio precedente."
+                        NSLocalizedDescriptionKey: "Could not stop the service from an earlier version."
                     ])
                 }
             }
@@ -101,7 +101,8 @@ final class Servizio: ObservableObject {
             try azione()
         } catch {
             let dettaglio = error as NSError
-            errore = "\(dettaglio.localizedDescription) (\(dettaglio.domain), \(dettaglio.code))"
+            let motivo = dettaglio.domain == "Rotella" ? dettaglio.localizedDescription : "macOS could not complete the service operation."
+            errore = "\(motivo) (\(dettaglio.domain), \(dettaglio.code))"
         }
         aggiorna()
     }
