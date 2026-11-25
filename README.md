@@ -10,7 +10,7 @@ Rotella is a macOS utility for smoother mouse-wheel scrolling and independent sc
 - Smooth discrete wheel steps and tune speed, acceleration, deceleration, and initial response.
 - Install or uninstall the background service from the app window.
 
-<img src="Resources/rotella-settings.png" alt="Rotella settings showing service controls, scroll direction switches, and mouse-wheel sliders" width="560">
+<img src="Resources/rotella-settings.png" alt="English Rotella settings showing background service and scroll direction controls" width="420"> <img src="Resources/rotella-mouse-wheel.png" alt="English Rotella settings showing all four mouse-wheel sliders" width="420">
 
 *Rotella settings with service controls, independent scroll directions, and mouse-wheel tuning.*
 
