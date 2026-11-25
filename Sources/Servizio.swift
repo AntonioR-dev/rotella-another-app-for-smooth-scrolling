@@ -5,7 +5,8 @@ import SwiftUI
 
 @MainActor
 final class Servizio: ObservableObject {
-    private static let nomePlist = "local.rotella.agent.plist"
+    private static let nomePlist = "local.rotella.scroll-service.plist"
+    private let agentePrecedente = SMAppService.agent(plistName: "local.rotella.agent.plist")
     private let agente = SMAppService.agent(plistName: Servizio.nomePlist)
     private var plistIncluso: Bool {
         let url = Bundle.main.bundleURL.appendingPathComponent("Contents/Library/LaunchAgents")
@@ -59,7 +60,14 @@ final class Servizio: ObservableObject {
     func installa() {
         aggiorna()
         guard puoInstallare else { return }
-        esegui { try agente.register() }
+        esegui {
+            // Retire the old registration before starting the replacement.
+            let statoPrecedente = agentePrecedente.status
+            if statoPrecedente == .enabled || statoPrecedente == .requiresApproval {
+                try agentePrecedente.unregister()
+            }
+            try agente.register()
+        }
     }
 
     func disinstalla() {
